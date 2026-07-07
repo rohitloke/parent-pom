@@ -5,9 +5,6 @@
              https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <!-- ============================================================
-       Parent POM coordinates — change to match your organization
-       ============================================================ -->
   <groupId>com.rohitloke</groupId>
   <artifactId>parent-pom</artifactId>
   <version>1.0.0</version>
@@ -88,10 +85,6 @@
     </dependencies>
   </dependencyManagement>
 
-  <!-- ============================================================
-       Dependencies inherited by EVERY child project.
-       Keep this list minimal — prefer dependencyManagement.
-       ============================================================ -->
   <dependencies>
     <!-- Lombok — provided at compile time only -->
     <dependency>
@@ -109,9 +102,6 @@
     </dependency>
   </dependencies>
 
-  <!-- ============================================================
-       Build — plugin versions and configuration enforced globally
-       ============================================================ -->
   <build>
     <pluginManagement>
       <plugins>
