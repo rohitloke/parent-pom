@@ -1,370 +1,363 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-             https://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0              https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.rohitloke</groupId>
-  <artifactId>parent-pom</artifactId>
-  <version>1.0.0</version>
-  <packaging>pom</packaging>
+    <groupId>com.rohitloke</groupId>
+    <artifactId>parent-pom</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
 
-  <name>Parent POM</name>
-  <description>
-    Provides Spring Boot BOM, common dependency versions and
-    a consistent plugin configuration for all child projects.
-  </description>
+    <name>Parent POM</name>
+    <description>Provides Spring Boot BOM, common dependency versions and
+    a consistent plugin configuration for all child projects.</description>
 
-  <properties>
-    <java.version>25</java.version>
-    <maven.compiler.source>${java.version}</maven.compiler.source>
-    <maven.compiler.target>${java.version}</maven.compiler.target>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <properties>
+        <java.version>25</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-    <!-- Spring Boot (drives the BOM version below) -->
-    <spring-boot.version>4.1.0</spring-boot.version>
+        <!-- Spring Boot (drives the BOM version below) -->
+        <spring-boot.version>4.1.0</spring-boot.version>
 
-    <!-- Extra library versions not managed by the Spring Boot BOM -->
-    <mapstruct.version>1.6.3</mapstruct.version>
-    <lombok.version>1.18.34</lombok.version>
-    <testcontainers.version>1.20.4</testcontainers.version>
-    <springdoc-openapi.version>3.0.0</springdoc-openapi.version>
+        <!-- Extra library versions not managed by the Spring Boot BOM -->
+        <mapstruct.version>1.6.3</mapstruct.version>
+        <lombok.version>1.18.34</lombok.version>
+        <testcontainers.version>1.20.4</testcontainers.version>
+        <springdoc-openapi.version>3.0.0</springdoc-openapi.version>
 
-    <!-- Plugin versions -->
-    <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
-    <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
-    <maven-failsafe-plugin.version>3.5.2</maven-failsafe-plugin.version>
-    <maven-enforcer-plugin.version>3.5.0</maven-enforcer-plugin.version>
-    <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
-    <jacoco-maven-plugin.version>0.8.12</jacoco-maven-plugin.version>
-    <git-commit-id-plugin.version>9.0.1</git-commit-id-plugin.version>
-    <spotless-maven-plugin.version>3.8.0</spotless-maven-plugin.version>
-    <palantir-java-format.version>2.94.0</palantir-java-format.version>
-  </properties>
+        <!-- Plugin versions -->
+        <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
+        <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
+        <maven-failsafe-plugin.version>3.5.2</maven-failsafe-plugin.version>
+        <maven-enforcer-plugin.version>3.5.0</maven-enforcer-plugin.version>
+        <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
+        <jacoco-maven-plugin.version>0.8.12</jacoco-maven-plugin.version>
+        <git-commit-id-plugin.version>9.0.1</git-commit-id-plugin.version>
+        <spotless-maven-plugin.version>3.8.0</spotless-maven-plugin.version>
+        <palantir-java-format.version>2.94.0</palantir-java-format.version>
+    </properties>
 
-  <dependencyManagement>
-    <dependencies>
-      <!-- Spring Boot BOM — import scope pulls in all version management -->
-      <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-dependencies</artifactId>
-        <version>${spring-boot.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
+    <dependencyManagement>
+        <dependencies>
+            <!-- Spring Boot BOM — import scope pulls in all version management -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
 
-      <!-- MapStruct (annotation processor — version not in Boot BOM) -->
-      <dependency>
-        <groupId>org.mapstruct</groupId>
-        <artifactId>mapstruct</artifactId>
-        <version>${mapstruct.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.mapstruct</groupId>
-        <artifactId>mapstruct-processor</artifactId>
-        <version>${mapstruct.version}</version>
-      </dependency>
-
-      <!-- Testcontainers BOM -->
-      <dependency>
-        <groupId>org.testcontainers</groupId>
-        <artifactId>testcontainers-bom</artifactId>
-        <version>${testcontainers.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-
-      <!-- SpringDoc OpenAPI / Swagger UI -->
-      <dependency>
-        <groupId>org.springdoc</groupId>
-        <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-        <version>${springdoc-openapi.version}</version>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
-
-  <dependencies>
-    <!-- Lombok — provided at compile time only -->
-    <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-      <version>${lombok.version}</version>
-      <scope>provided</scope>
-    </dependency>
-
-    <!-- Spring Boot test slice — available in every child test scope -->
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-test</artifactId>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
-
-  <build>
-    <pluginManagement>
-      <plugins>
-        <!-- Spring Boot Maven Plugin -->
-        <plugin>
-          <groupId>org.springframework.boot</groupId>
-          <artifactId>spring-boot-maven-plugin</artifactId>
-          <version>${spring-boot.version}</version>
-          <configuration>
-            <!-- Removes plain jar when repackaging -->
-            <classifier>exec</classifier>
-            <excludes>
-              <exclude>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-              </exclude>
-            </excludes>
-          </configuration>
-          <executions>
-            <execution>
-              <goals>
-                <goal>repackage</goal>
-                <!-- Writes build-info.properties used by Actuator /info -->
-                <goal>build-info</goal>
-              </goals>
-            </execution>
-          </executions>
-        </plugin>
-
-        <!-- Compiler — enable annotation processors for Lombok + MapStruct -->
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-compiler-plugin</artifactId>
-          <version>${maven-compiler-plugin.version}</version>
-          <configuration>
-            <release>${java.version}</release>
-            <annotationProcessorPaths>
-              <path>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>${lombok.version}</version>
-              </path>
-              <path>
+            <!-- MapStruct (annotation processor — version not in Boot BOM) -->
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${mapstruct.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.mapstruct</groupId>
                 <artifactId>mapstruct-processor</artifactId>
                 <version>${mapstruct.version}</version>
-              </path>
-            </annotationProcessorPaths>
-            <compilerArgs>
-              <arg>-Amapstruct.defaultComponentModel=spring</arg>
-            </compilerArgs>
-          </configuration>
-        </plugin>
+            </dependency>
 
-        <!-- Surefire — unit tests -->
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-surefire-plugin</artifactId>
-          <version>${maven-surefire-plugin.version}</version>
-          <configuration>
-            <!-- JVM args required for Spring AOT / virtual threads on Java 25 -->
-            <argLine>
-              @{argLine}
+            <!-- Testcontainers BOM -->
+            <dependency>
+                <groupId>org.testcontainers</groupId>
+                <artifactId>testcontainers-bom</artifactId>
+                <version>${testcontainers.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- SpringDoc OpenAPI / Swagger UI -->
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+                <version>${springdoc-openapi.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <!-- Lombok — provided at compile time only -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Spring Boot test slice — available in every child test scope -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <!-- Spring Boot Maven Plugin -->
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring-boot.version}</version>
+                    <configuration>
+                        <!-- Removes plain jar when repackaging -->
+                        <classifier>exec</classifier>
+                        <excludes>
+                            <exclude>
+                                <groupId>org.projectlombok</groupId>
+                                <artifactId>lombok</artifactId>
+                            </exclude>
+                        </excludes>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>repackage</goal>
+                                <!-- Writes build-info.properties used by Actuator /info -->
+                                <goal>build-info</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <!-- Compiler — enable annotation processors for Lombok + MapStruct -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-plugin.version}</version>
+                    <configuration>
+                        <release>${java.version}</release>
+                        <annotationProcessorPaths>
+                            <path>
+                                <groupId>org.projectlombok</groupId>
+                                <artifactId>lombok</artifactId>
+                                <version>${lombok.version}</version>
+                            </path>
+                            <path>
+                                <groupId>org.mapstruct</groupId>
+                                <artifactId>mapstruct-processor</artifactId>
+                                <version>${mapstruct.version}</version>
+                            </path>
+                        </annotationProcessorPaths>
+                        <compilerArgs>
+                            <arg>-Amapstruct.defaultComponentModel=spring</arg>
+                        </compilerArgs>
+                    </configuration>
+                </plugin>
+
+                <!-- Surefire — unit tests -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${maven-surefire-plugin.version}</version>
+                    <configuration>
+                        <!-- JVM args required for Spring AOT / virtual threads on Java 25 -->
+                        <argLine>@{argLine}
               --add-opens java.base/java.lang=ALL-UNNAMED
               --add-opens java.base/java.util=ALL-UNNAMED
-              --enable-preview
-            </argLine>
-          </configuration>
-        </plugin>
+              --enable-preview</argLine>
+                    </configuration>
+                </plugin>
 
-        <!-- Failsafe — integration tests (*IT.java) -->
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-failsafe-plugin</artifactId>
-          <version>${maven-failsafe-plugin.version}</version>
-          <executions>
-            <execution>
-              <goals>
-                <goal>integration-test</goal>
-                <goal>verify</goal>
-              </goals>
-            </execution>
-          </executions>
-        </plugin>
+                <!-- Failsafe — integration tests (*IT.java) -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-failsafe-plugin</artifactId>
+                    <version>${maven-failsafe-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>integration-test</goal>
+                                <goal>verify</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
 
-        <!-- Enforcer — fail fast on bad environments -->
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-enforcer-plugin</artifactId>
-          <version>${maven-enforcer-plugin.version}</version>
-          <executions>
-            <execution>
-              <id>enforce</id>
-              <goals>
-                <goal>enforce</goal>
-              </goals>
-              <configuration>
-                <rules>
-                  <requireMavenVersion>
-                    <version>[3.9,)</version>
-                  </requireMavenVersion>
-                  <requireJavaVersion>
-                    <version>[25,)</version>
-                  </requireJavaVersion>
-                  <banDuplicatePomDependencyVersions/>
-                  <dependencyConvergence/>
-                </rules>
-              </configuration>
-            </execution>
-          </executions>
-        </plugin>
+                <!-- Enforcer — fail fast on bad environments -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-enforcer-plugin</artifactId>
+                    <version>${maven-enforcer-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>enforce</id>
+                            <goals>
+                                <goal>enforce</goal>
+                            </goals>
+                            <configuration>
+                                <rules>
+                                    <requireMavenVersion>
+                                        <version>[3.9,)</version>
+                                    </requireMavenVersion>
+                                    <requireJavaVersion>
+                                        <version>[25,)</version>
+                                    </requireJavaVersion>
+                                    <banDuplicatePomDependencyVersions/>
+                                    <dependencyConvergence/>
+                                </rules>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
 
-        <!-- Source jar (useful when publishing to a company Nexus/Artifactory) -->
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-source-plugin</artifactId>
-          <version>${maven-source-plugin.version}</version>
-          <executions>
-            <execution>
-              <id>attach-sources</id>
-              <goals>
-                <goal>jar-no-fork</goal>
-              </goals>
-            </execution>
-          </executions>
-        </plugin>
+                <!-- Source jar (useful when publishing to a company Nexus/Artifactory) -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>${maven-source-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>attach-sources</id>
+                            <goals>
+                                <goal>jar-no-fork</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
 
-        <!-- JaCoCo — code coverage -->
-        <plugin>
-          <groupId>org.jacoco</groupId>
-          <artifactId>jacoco-maven-plugin</artifactId>
-          <version>${jacoco-maven-plugin.version}</version>
-          <executions>
-            <execution>
-              <id>prepare-agent</id>
-              <goals>
-                <goal>prepare-agent</goal>
-              </goals>
-            </execution>
-            <execution>
-              <id>report</id>
-              <phase>verify</phase>
-              <goals>
-                <goal>report</goal>
-              </goals>
-            </execution>
-          </executions>
-        </plugin>
+                <!-- JaCoCo — code coverage -->
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>${jacoco-maven-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>prepare-agent</id>
+                            <goals>
+                                <goal>prepare-agent</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>report</id>
+                            <goals>
+                                <goal>report</goal>
+                            </goals>
+                            <phase>verify</phase>
+                        </execution>
+                    </executions>
+                </plugin>
 
-        <!-- Spotless — code formatter (Palantir Java Format + POM/XML/JSON) -->
-        <plugin>
-          <groupId>com.diffplug.spotless</groupId>
-          <artifactId>spotless-maven-plugin</artifactId>
-          <version>${spotless-maven-plugin.version}</version>
-          <configuration>
-            <!-- Java sources -->
-            <java>
-              <!--
+                <!-- Spotless — code formatter (Palantir Java Format + POM/XML/JSON) -->
+                <plugin>
+                    <groupId>com.diffplug.spotless</groupId>
+                    <artifactId>spotless-maven-plugin</artifactId>
+                    <version>${spotless-maven-plugin.version}</version>
+                    <configuration>
+                        <!-- Java sources -->
+                        <java>
+                            <!--
                   Palantir Java Format -> 120-char line length,
                   4-space indent, lambda-friendly style.
                   Built on top of google-java-format.
               -->
-              <palantirJavaFormat>
-                <version>${palantir-java-format.version}</version>
-                <!-- PALANTIR (default) or GOOGLE -->
-                <style>PALANTIR</style>
-              </palantirJavaFormat>
-              <!-- Keeps @Override, @Deprecated etc. on their own line -->
-              <formatAnnotations/>
-              <!-- Disallow wildcard imports -->
-              <forbidWildcardImports/>
-              <removeUnusedImports/>
-            </java>
-            <!-- Maven POM files -->
-            <pom>
-              <includes>
-                <include>pom.xml</include>
-                <include>**/pom.xml</include>
-              </includes>
-              <sortPom>
-                <expandEmptyElements>false</expandEmptyElements>
-                <nrOfIndentSpace>4</nrOfIndentSpace>
-              </sortPom>
-            </pom>
-            <!-- JSON files -->
-            <json>
-              <includes>
-                <include>src/**/*.json</include>
-              </includes>
-              <jackson/>
-            </json>
-          </configuration>
-          <executions>
-            <!--
+                            <palantirJavaFormat>
+                                <version>${palantir-java-format.version}</version>
+                                <!-- PALANTIR (default) or GOOGLE -->
+                                <style>PALANTIR</style>
+                            </palantirJavaFormat>
+                            <!-- Keeps @Override, @Deprecated etc. on their own line -->
+                            <formatAnnotations/>
+                            <!-- Disallow wildcard imports -->
+                            <forbidWildcardImports/>
+                            <removeUnusedImports/>
+                        </java>
+                        <!-- Maven POM files -->
+                        <pom>
+                            <includes>
+                                <include>pom.xml</include>
+                                <include>**/pom.xml</include>
+                            </includes>
+                            <sortPom>
+                                <expandEmptyElements>false</expandEmptyElements>
+                                <nrOfIndentSpace>4</nrOfIndentSpace>
+                            </sortPom>
+                        </pom>
+                        <!-- JSON files -->
+                        <json>
+                            <includes>
+                                <include>src/**/*.json</include>
+                            </includes>
+                            <jackson/>
+                        </json>
+                    </configuration>
+                    <executions>
+                        <!--
                 spotless:check is bound to the 'verify' phase by default.
                 Use 'mvn spotless:apply' to auto-fix, 'mvn verify' to enforce.
             -->
-            <execution>
-              <goals>
-                <goal>check</goal>
-              </goals>
-            </execution>
-          </executions>
-        </plugin>
+                        <execution>
+                            <goals>
+                                <goal>check</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
 
-        <!-- Git Commit Id — exposes git metadata to /actuator/info -->
-        <plugin>
-          <groupId>io.github.git-commit-id</groupId>
-          <artifactId>git-commit-id-maven-plugin</artifactId>
-          <version>${git-commit-id-plugin.version}</version>
-          <executions>
-            <execution>
-              <goals>
-                <goal>revision</goal>
-              </goals>
-            </execution>
-          </executions>
-          <configuration>
-            <failOnNoGitDirectory>false</failOnNoGitDirectory>
-            <generateGitPropertiesFile>true</generateGitPropertiesFile>
-          </configuration>
-        </plugin>
-      </plugins>
-    </pluginManagement>
+                <!-- Git Commit Id — exposes git metadata to /actuator/info -->
+                <plugin>
+                    <groupId>io.github.git-commit-id</groupId>
+                    <artifactId>git-commit-id-maven-plugin</artifactId>
+                    <version>${git-commit-id-plugin.version}</version>
+                    <configuration>
+                        <failOnNoGitDirectory>false</failOnNoGitDirectory>
+                        <generateGitPropertiesFile>true</generateGitPropertiesFile>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>revision</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
 
-    <!-- Plugins active in EVERY child build without opting in -->
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-enforcer-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <groupId>org.jacoco</groupId>
-        <artifactId>jacoco-maven-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <groupId>com.diffplug.spotless</groupId>
-        <artifactId>spotless-maven-plugin</artifactId>
-      </plugin>
-    </plugins>
-  </build>
-
-  <profiles>
-    <!-- Skip tests quickly during local development: mvn package -Pskip-tests -->
-    <profile>
-      <id>skip-tests</id>
-      <properties>
-        <maven.test.skip>true</maven.test.skip>
-      </properties>
-    </profile>
-
-    <!-- Integration test profile: mvn verify -Pintegration-tests -->
-    <profile>
-      <id>integration-tests</id>
-      <build>
+        <!-- Plugins active in EVERY child build without opting in -->
         <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-failsafe-plugin</artifactId>
-          </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>com.diffplug.spotless</groupId>
+                <artifactId>spotless-maven-plugin</artifactId>
+            </plugin>
         </plugins>
-      </build>
-    </profile>
-  </profiles>
+    </build>
+
+    <profiles>
+        <!-- Skip tests quickly during local development: mvn package -Pskip-tests -->
+        <profile>
+            <id>skip-tests</id>
+            <properties>
+                <maven.test.skip>true</maven.test.skip>
+            </properties>
+        </profile>
+
+        <!-- Integration test profile: mvn verify -Pintegration-tests -->
+        <profile>
+            <id>integration-tests</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>
