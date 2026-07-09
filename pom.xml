@@ -21,7 +21,7 @@
         <!-- Spring Boot (drives the BOM version below) -->
         <spring-boot.version>4.1.0</spring-boot.version>
         <spring-ai.version>1.0.0</spring-ai.version>
-        <spring-docker-compose.version>1.0.1</spring-docker-compose.version>
+        <spring-docker-compose.version>3.1.1</spring-docker-compose.version>
 
         <!-- Extra library versions not managed by the Spring Boot BOM -->
         <mapstruct.version>1.6.3</mapstruct.version>
