@@ -4,7 +4,7 @@
 
     <groupId>com.rohitloke</groupId>
     <artifactId>parent-pom</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <packaging>pom</packaging>
 
     <name>Parent POM</name>
@@ -21,6 +21,7 @@
         <!-- Spring Boot (drives the BOM version below) -->
         <spring-boot.version>4.1.0</spring-boot.version>
         <spring-ai.version>1.0.0</spring-ai.version>
+        <spring-docker-compose.version>1.0.1</spring-docker-compose.version>
 
         <!-- Extra library versions not managed by the Spring Boot BOM -->
         <mapstruct.version>1.6.3</mapstruct.version>
@@ -58,6 +59,13 @@
                 <version>${spring-ai.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <!-- Spring Docker Compose -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-docker-compose</artifactId>
+                <version>${spring-docker-compose.version}</version>
             </dependency>
 
             <!-- MapStruct (annotation processor — version not in Boot BOM) -->
