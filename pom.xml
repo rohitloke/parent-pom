@@ -4,7 +4,7 @@
 
     <groupId>com.rohitloke</groupId>
     <artifactId>parent-pom</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <packaging>pom</packaging>
 
     <name>Parent POM</name>
@@ -21,11 +21,10 @@
         <!-- Spring Boot (drives the BOM version below) -->
         <spring-boot.version>4.1.0</spring-boot.version>
         <spring-ai.version>1.0.0</spring-ai.version>
-        <spring-docker-compose.version>3.1.1</spring-docker-compose.version>
 
         <!-- Extra library versions not managed by the Spring Boot BOM -->
         <mapstruct.version>1.6.3</mapstruct.version>
-        <lombok.version>1.18.34</lombok.version>
+        <lombok.version>1.18.46</lombok.version>
         <testcontainers.version>1.20.4</testcontainers.version>
         <springdoc-openapi.version>3.0.0</springdoc-openapi.version>
 
@@ -35,7 +34,7 @@
         <maven-failsafe-plugin.version>3.5.2</maven-failsafe-plugin.version>
         <maven-enforcer-plugin.version>3.5.0</maven-enforcer-plugin.version>
         <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
-        <jacoco-maven-plugin.version>0.8.12</jacoco-maven-plugin.version>
+        <jacoco-maven-plugin.version>0.8.15</jacoco-maven-plugin.version>
         <git-commit-id-plugin.version>9.0.1</git-commit-id-plugin.version>
         <spotless-maven-plugin.version>3.8.0</spotless-maven-plugin.version>
         <palantir-java-format.version>2.94.0</palantir-java-format.version>
@@ -59,13 +58,6 @@
                 <version>${spring-ai.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>
-
-            <!-- Spring Docker Compose -->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-docker-compose</artifactId>
-                <version>${spring-docker-compose.version}</version>
             </dependency>
 
             <!-- MapStruct (annotation processor — version not in Boot BOM) -->
@@ -151,6 +143,8 @@
                     <version>${maven-compiler-plugin.version}</version>
                     <configuration>
                         <release>${java.version}</release>
+                        <source>25</source>
+                        <target>25</target>
                         <annotationProcessorPaths>
                             <path>
                                 <groupId>org.projectlombok</groupId>
