@@ -4,7 +4,7 @@
 
     <groupId>com.rohitloke</groupId>
     <artifactId>parent-pom</artifactId>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
     <packaging>pom</packaging>
 
     <name>Parent POM</name>
@@ -87,6 +87,7 @@
                 <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
                 <version>${springdoc-openapi.version}</version>
             </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -212,7 +213,6 @@
                                         <version>[25,)</version>
                                     </requireJavaVersion>
                                     <banDuplicatePomDependencyVersions/>
-                                    <dependencyConvergence/>
                                 </rules>
                             </configuration>
                         </execution>
